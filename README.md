@@ -1,33 +1,52 @@
-# 🥗 Wealthy Eater — AI-Powered HealthTech Platform
-
-> **Graduation Project · FPT University Can Tho · 2026**  
-> A comprehensive HealthTech ecosystem connecting users with certified nutritionists, automating personalized meal planning via AI, and facilitating expert consultations with integrated payments.
+<h1 align="center">🥗 Wealthy Eater</h1>
+<p align="center">
+  <strong>AI-Powered HealthTech Platform · Capstone Project · FPT University Can Tho 2026</strong>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/>
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white"/>
+</p>
 
 ---
 
-## 📐 Architecture Overview
+## 📌 Project Overview
+
+**Wealthy Eater** is a comprehensive HealthTech ecosystem that connects users with certified nutritionists. It automates personalized meal planning via AI, tracks nutrition through meal image scanning, and facilitates real-time expert consultations with integrated payment flows.
+
+> **Type:** Graduation / Capstone Project — 4-member team  
+> **Period:** May – August 2026  
+> **University:** FPT University – Can Tho Campus
+
+---
+
+## 🏗️ System Architecture
 
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│                        CLIENT LAYER                              │
-│   Flutter Mobile App (iOS / Android / Web)  │  React Admin UI   │
-└────────────────────┬─────────────────────────┬───────────────────┘
-                     │ REST + Socket.IO         │ REST
-┌────────────────────▼─────────────────────────▼───────────────────┐
-│                   BACKEND CORE API (Node.js / Express 5)         │
-│   Auth · Meal Plans · Consultations · Chat · PayOS · Cloudinary  │
-└──────┬────────────────────────────────────────────┬──────────────┘
-       │ HTTP (Internal)                            │ Webhook / HTTP
-┌──────▼──────────┐                      ┌──────────▼──────────────┐
-│  AI Optimizer   │                      │    n8n Orchestrator      │
-│ Python / FastAPI│                      │  Gemini Vision · n8n    │
-│ PuLP LP / MILP  │                      │  Pantry Detect · Calorie │
-└─────────────────┘                      └─────────────────────────┘
-              │                  │
-       ┌──────▼──────┐    ┌──────▼──────┐
-       │   MongoDB   │    │    Redis     │
-       │  (Primary)  │    │  (Caching)   │
-       └─────────────┘    └─────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                          CLIENT LAYER                                │
+│   📱 Flutter Mobile App (iOS / Android / Web)  │  🖥️ React Admin UI  │
+└─────────────────┬──────────────────────────────┬─────────────────────┘
+                  │  REST + Socket.IO             │  REST
+┌─────────────────▼──────────────────────────────▼─────────────────────┐
+│              BACKEND CORE API — Node.js / Express 5                   │
+│  Auth · RBAC · Recipes · Meal Plans · Chat · Notifications · PayOS   │
+└──────┬─────────────────────────────────────────────────┬─────────────┘
+       │  HTTP (Internal Secret)                         │  Webhook
+┌──────▼──────────────┐                     ┌───────────▼──────────────┐
+│  AI Optimization    │                     │   n8n Orchestrator       │
+│  Python / FastAPI   │                     │   Gemini Vision API      │
+│  PuLP LP + MILP     │                     │   Pantry Detect          │
+│  GLPK Solver        │                     │   Auto-Calorie Adjust    │
+└─────────────────────┘                     └──────────────────────────┘
+        │                                              │
+ ┌──────▼───────┐    ┌────────────────┐    ┌──────────▼──────────┐
+ │   MongoDB    │    │     Redis       │    │  Firebase FCM       │
+ │  (Primary DB)│    │  (Cache/Token) │    │  (Push Notif.)      │
+ └──────────────┘    └────────────────┘    └─────────────────────┘
 ```
 
 ---
@@ -36,96 +55,171 @@
 
 | Layer | Technologies |
 |-------|-------------|
-| **Mobile App** | Flutter (Dart) · BLoC · GoRouter · fl_chart · Socket.IO Client · Google Sign-In |
-| **Web Admin** | React 19 · Vite 8 · Tailwind CSS 4 · Recharts · React Router v7 |
-| **Backend API** | Node.js · Express 5 · MongoDB (Mongoose) · Redis (ioredis) · Socket.IO |
-| **Auth & Security** | JWT · Google OAuth2 · bcryptjs · Helmet · Rate Limiting · HMAC-SHA256 |
-| **AI Optimization** | Python 3.11 · FastAPI · PuLP · GLPK (LP / MILP solver) |
-| **AI & Automation** | Google Gemini Flash (3.5 / 3.6) · n8n Workflow Automation |
-| **Cloud Services** | Cloudinary (media) · Firebase FCM (push notifications) · Resend (email) |
-| **Payment** | PayOS (VietQR Bank Transfer) · Webhook Signature Verification |
-| **DevOps** | Docker · Docker Compose · Git / GitHub |
+| **📱 Mobile App** | Flutter (Dart) · BLoC + Provider · GoRouter · fl_chart · Socket.IO Client · Google Sign-In · WebView Flutter |
+| **🖥️ Web Admin** | React 19 · Vite 8 · Tailwind CSS 4 · Recharts · React Router v7 · Lucide Icons |
+| **⚙️ Backend API** | Node.js · Express 5 · MongoDB (Mongoose ODM) · Redis (ioredis) · Socket.IO |
+| **🔐 Auth & Security** | JWT · Google OAuth2 · bcryptjs · Helmet · Rate Limiting · HMAC-SHA256 Webhook |
+| **🤖 AI Optimization** | Python 3.11 · FastAPI · PuLP · GLPK Solver · MILP (Mixed-Integer Linear Programming) |
+| **🧠 AI & Automation** | Google Gemini Flash (3.5 / 3.6) · n8n Workflow Automation |
+| **☁️ Cloud Services** | Cloudinary (media) · Firebase Admin SDK (FCM push) · Resend + Nodemailer (email/OTP) |
+| **💳 Payment** | PayOS — VietQR Bank Transfer · Webhook Signature Verification |
+| **🐳 DevOps** | Docker · Docker Compose |
 
 ---
 
-## ✨ Key Features
+## ✨ Feature Highlights
 
-### 👤 For Users (Mobile App)
-- 📊 **Biometric Tracking** — BMI, BMR, TDEE auto-calculation with weight log history
-- 🍽️ **AI Meal Planning** — Weekly personalized meal plan generated via LP/MILP optimization engine respecting calorie targets and allergy constraints
-- 📸 **Meal Image Scan** — Snap a food photo → Gemini Vision extracts nutritional estimates automatically
-- 🧺 **Pantry Management** — Photo-scan your fridge, auto-detect ingredients via n8n + Gemini Vision
-- 💬 **Real-time Chat** — Bidirectional consultation chat with nutritionists (Socket.IO, image support)
-- 🤖 **AI Chatbot** — Nutrition Q&A assistant powered by Google Gemini Flash
-- 💳 **PayOS Payment** — Book consultations with in-app VietQR payment flow
+### 👤 For Customers (Mobile)
+| Feature | Description |
+|---------|-------------|
+| 📊 **Biometric Dashboard** | Auto-compute BMI, BMR, TDEE from height/weight/age; track weight history with charts |
+| 🍽️ **AI Meal Planning** | LP/MILP optimization engine generates personalized weekly meal plans within calorie targets and allergy constraints |
+| 📸 **Meal Image Scan** | Snap food photo → Gemini Vision extracts macro estimates (calories, protein, carbs, fat) |
+| 🧺 **Smart Pantry** | Photo-scan fridge → n8n + Gemini Vision auto-detects ingredients and syncs to pantry |
+| 🛒 **Shopping List** | Auto-generates ingredient shopping lists from weekly meal plans |
+| 💬 **Live Consultation Chat** | Real-time bidirectional chat (Socket.IO) with nutritionists, image attachment support |
+| 🤖 **Nutrition AI Chatbot** | Gemini-powered chatbot for on-demand nutrition Q&A |
+| 💳 **In-App Payment** | Embedded PayOS / VietQR payment flow via WebView without leaving the app |
+| 🔔 **Smart Notifications** | Water reminders, meal reminders (local), push notifications (Firebase FCM) |
 
-### 🧑‍⚕️ For Nutritionists (Mobile App)
-- 📋 Manage client profiles, biometrics, and meal plan requests
-- ✏️ Edit and customize AI-generated meal plans for each client
-- 💬 Live chat with real-time notifications
+### 🧑‍⚕️ For Nutritionists (Mobile)
+| Feature | Description |
+|---------|-------------|
+| 📋 **Client Management** | View client biometrics, meal logs, and macro deviation alerts |
+| ✏️ **Meal Plan Editor** | Customize and override AI-generated meal plans per client |
+| 💬 **Live Chat** | Real-time consultation chat with client diet audit summary |
 
 ### 🖥️ For Admins (Web Dashboard)
-- 📈 Platform analytics (revenue, user growth, nutritionist performance)
-- 👥 User & nutritionist management
-- 🥘 Recipe & ingredient management (with XLSX export)
-- 💰 Transaction logs & commission settings
+| Feature | Description |
+|---------|-------------|
+| 📈 **Platform Analytics** | Revenue charts (Recharts), user growth, nutritionist performance |
+| 👥 **User Management** | Full CRUD on users and nutritionists; approval/rejection of expert applications |
+| 🥘 **Recipe & Ingredient Management** | Add/edit recipes, ingredients, micronutrients; bulk import via Excel (.xlsx) |
+| 💰 **Transaction Logs** | View and export payment transactions; configure commission rates |
+| ⚙️ **System Settings** | Platform-wide configuration management |
 
 ---
 
-## 🧬 AI Optimization Engine (Python / FastAPI)
+## 🤖 AI Optimization Engine (Python / FastAPI)
 
-The `wealthy-eater-ai` microservice implements two Linear Programming solvers via **PuLP + GLPK**:
+The `wealthy-eater-ai` microservice implements two solvers via **PuLP + GLPK**:
 
-| Endpoint | Algorithm | Purpose |
-|----------|-----------|---------|
-| `POST /api/v1/ai/compute-diet` | **LP** (Linear Programming) | Allocate exact gram portions of ingredients to hit daily macro targets (Calories, Protein, Carbs, Fat) |
-| `POST /api/v1/ai/compute-recipe-plan` | **MILP** (Mixed-Integer LP) | Select optimal recipe combinations from a pool using binary decision variables, enforcing min/max variety constraints |
+### Endpoint 1: `POST /api/v1/ai/compute-diet` — Linear Programming (LP)
+Allocates exact **gram-level portions** of available ingredients to precisely hit macro targets:
 
-Both solvers enforce **allergen exclusion rules** and **activation thresholds** per ingredient.
+```
+Minimize: total_mass = Σ x_i
+Subject to:
+  Σ (x_i × calories_i / 100) == target_calories
+  Σ (x_i × protein_i / 100)  == target_protein
+  Σ (x_i × carbs_i / 100)    == target_carbs
+  Σ (x_i × fat_i / 100)      == target_fat
+  x_i ∈ [0, 500g]  ∀ ingredient i
+  x_i = 0          if ingredient i ∈ allergy_exclusions
+```
+
+### Endpoint 2: `POST /api/v1/ai/compute-recipe-plan` — MILP (Mixed-Integer LP)
+Selects the **optimal recipe combination** for a full meal plan using binary decision variables to enforce variety constraints, while filtering allergens.
+
+Both solvers use `X-INTERNAL-SECRET` header authentication for service-to-service security.
 
 ---
 
 ## 🔄 n8n Automation Workflows
 
-| Workflow | Trigger | Description |
-|----------|---------|-------------|
-| **UC-41 Detect Pantry** | User uploads fridge photo | Calls Gemini Vision → extracts ingredient list → syncs to Pantry collection |
-| **UC-42 Auto-Adjust Calories** | Weight log updated | Recalculates BMR/TDEE → adjusts future meal plan calorie targets |
-| **Template Matching** | Meal plan request | Matches user profile to pre-built templates before invoking the LP solver |
+| Workflow | Trigger | Actions |
+|----------|---------|---------|
+| **UC-41 Pantry Detection** | User uploads fridge photo | Calls Gemini Vision → extracts ingredient list → syncs to MongoDB Pantry collection |
+| **UC-42 Calorie Auto-Adjust** | Weight log updated | Recalculates BMR/TDEE → adjusts calorie targets for upcoming meal plans |
+| **Template Matching** | Meal plan requested | Matches user profile against pre-built templates before invoking the LP solver |
 
 ---
 
-## 🚀 Quick Start (Docker)
+## 💳 PayOS Payment Flow
+
+```
+User selects Nutritionist → [Backend] Creates ConsultationContract (status: pending_payment)
+                          → [PayOS SDK] Generates payment link + VietQR code
+                          → [Mobile] Renders PayOS UI inside WebView
+User completes payment    → [PayOS] Sends POST to /api/webhooks/payos
+                          → [Backend] Verifies HMAC-SHA256 signature
+                          → Updates Transaction + ConsultationContract (status: active)
+                          → Sends confirmation push notification via Firebase FCM
+```
+
+---
+
+## 🗄️ Database Overview (MongoDB — 25+ Collections)
+
+| Category | Collections |
+|----------|------------|
+| **Identity** | `User` · `UserProfile` · `UserDietary` · `Nutritionist` · `MedicalCondition` |
+| **Recipes** | `Recipe` · `RecipeStep` · `RecipeNutrition` · `RecipeIngredient` · `Micronutrient` · `RecipeMicronutrientValue` |
+| **Meal Planning** | `MealPlan` · `MealPlanItem` · `MealPlanRequest` · `MealPlanTemplate` · `CustomerMealLog` · `MacroDeviationFlag` |
+| **Consultations** | `ConsultationContract` · `ConsultationMessage` |
+| **Payments** | `Transaction` |
+| **User Actions** | `RecipeReview` · `RecipeLike` · `ShoppingList` · `Pantry` · `WeightLog` · `UserAiRecipe` |
+| **Notifications** | `Notification` · `NotificationSetting` |
+| **System** | `AuditLog` · `SystemSetting` · `ChatbotSession` |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js ≥ 18 · Python 3.11 · Flutter 3.x · Docker
+
+### 1. Clone & configure environment
 
 ```bash
-# Clone the repo
 git clone https://github.com/Krezzy88/Capstone-Project.git
 cd Capstone-Project
 
-# Set up environment variables
+# Configure each service's environment
 cp wealthy_eater_backend/.env.example wealthy_eater_backend/.env
-cp wealthy-eater-ai/.env.example wealthy-eater-ai/.env
-# Edit the .env files with your API keys
+# Fill in: MONGODB_URI, REDIS_URL, GOOGLE_API_KEY, PAYOS_*, CLOUDINARY_*, FIREBASE_*, RESEND_API_KEY
+```
 
-# Start n8n orchestrator
+### 2. Start n8n Orchestrator (Docker)
+
+```bash
 docker compose up -d
+# n8n → http://localhost:5678
+```
 
-# Start AI service
+### 3. Start AI Optimization Service
+
+```bash
 cd wealthy-eater-ai
 pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+# AI Service → http://localhost:8000
+```
 
-# Start Backend API
+### 4. Start Backend Core API
+
+```bash
 cd wealthy_eater_backend
-npm install && npm run dev      # http://localhost:5000
+npm install
+npm run dev
+# Backend API → http://localhost:5000
+```
 
-# Start Admin UI
+### 5. Start Admin Dashboard
+
+```bash
 cd wealthy-eater-admin
-npm install && npm run dev      # http://localhost:5173
+npm install
+npm run dev
+# Admin UI → http://localhost:5173
+```
 
-# Start Mobile App
+### 6. Run Mobile App
+
+```bash
 cd wealthy_eater_mobile
-flutter pub get && flutter run
+flutter pub get
+flutter run
 ```
 
 ---
@@ -135,37 +229,42 @@ flutter pub get && flutter run
 ```
 Capstone-Project/
 │
-├── 📱 wealthy_eater_mobile/      # Flutter cross-platform app (iOS / Android / Web)
+├── 📱 wealthy_eater_mobile/        # Flutter cross-platform app
 │   └── lib/
-│       ├── core/                 # Theme, network client, error handling
-│       ├── data/                 # Models, services, repositories (impl)
-│       ├── domain/               # Entities, use-cases, repository interfaces
-│       └── presentation/         # Screens, widgets, providers (BLoC + Provider)
+│       ├── core/                   # Theme (Material 3), network client, errors
+│       ├── data/                   # Models, services, repository implementations
+│       ├── domain/                 # Entities, use-cases, repository interfaces
+│       └── presentation/           # Screens, widgets, BLoC/Provider state
 │
-├── 🖥️  wealthy-eater-admin/       # React 19 Admin Dashboard
+├── 🖥️  wealthy-eater-admin/         # React 19 Admin Dashboard
 │   └── src/
-│       ├── pages/                # Dashboard, users, recipes, analytics, etc.
-│       ├── components/           # Reusable UI components (charts, tables)
-│       └── services/             # Axios API client
+│       ├── pages/                  # Dashboard, users, recipes, analytics, transactions
+│       ├── components/             # Reusable UI (charts, tables, badges)
+│       └── services/               # Axios API client with session guard
 │
-├── ⚙️  wealthy_eater_backend/     # Node.js / Express 5 Core API
+├── ⚙️  wealthy_eater_backend/       # Node.js / Express 5 Core API
 │   └── src/
-│       ├── models/               # 25+ Mongoose schemas
-│       ├── controllers/          # Request handlers (RBAC: user / nutritionist / admin)
-│       ├── services/             # Business logic (Gemini, n8n, PayOS, email…)
-│       ├── routes/               # Express routers
-│       ├── middlewares/          # Auth, upload, rate-limit
-│       └── config/               # DB, Firebase, Cloudinary, Socket.IO, PayOS
+│       ├── models/                 # 25+ Mongoose schemas
+│       ├── controllers/            # RBAC handlers (user / nutritionist / admin)
+│       ├── services/               # Business logic (Gemini, n8n, PayOS, Cloudinary…)
+│       ├── routes/                 # Express routers (actor-prefixed)
+│       ├── middlewares/            # Auth JWT, upload, rate-limit, validation
+│       └── config/                 # DB, Firebase, Cloudinary, Socket.IO, PayOS
 │
-├── 🤖 wealthy-eater-ai/          # Python / FastAPI AI Optimization Service
+├── 🤖 wealthy-eater-ai/            # Python FastAPI Optimization Microservice
 │   └── app/
-│       ├── routers/              # /compute-diet · /compute-recipe-plan
-│       ├── services/             # LP & MILP solver logic (PuLP + GLPK)
-│       └── dto/                  # Pydantic request / response schemas
+│       ├── routers/                # /compute-diet · /compute-recipe-plan
+│       ├── services/               # LP & MILP solver logic (PuLP + GLPK)
+│       └── dto/                    # Pydantic request/response schemas
 │
-├── 📋 docs/                      # Technical design documents
-├── 🐳 docker-compose.yml         # n8n orchestrator container
-└── 📖 ROOT_GUIDE.md              # Developer guide (naming conventions, API routing)
+├── 📋 docs/                        # Technical design documents
+│   ├── database_schema.md
+│   ├── ai_meal_generation_logic.md
+│   ├── payos_webhook_flow.md
+│   └── state_management.md
+│
+├── 🐳 docker-compose.yml           # n8n orchestrator container
+└── 📖 ROOT_GUIDE.md                # API routing conventions & naming rules
 ```
 
 ---
@@ -174,34 +273,26 @@ Capstone-Project/
 
 | Document | Description |
 |----------|-------------|
-| [ROOT_GUIDE.md](./ROOT_GUIDE.md) | API routing conventions, naming rules, dev commands |
-| [Database Schema](./docs/database_schema.md) | Full MongoDB collection schemas (25+ models) |
-| [AI Meal Generation Logic](./docs/ai_meal_generation_logic.md) | LP/MILP algorithm design & n8n workflow integration |
-| [PayOS Webhook Flow](./docs/payos_webhook_flow.md) | Payment webhook lifecycle & HMAC verification |
+| [ROOT_GUIDE.md](./ROOT_GUIDE.md) | API routing conventions, actor-based naming rules, dev commands |
+| [Database Schema](./docs/database_schema.md) | Full MongoDB collection schemas (25+ models with field types) |
+| [AI Meal Generation Logic](./docs/ai_meal_generation_logic.md) | LP/MILP algorithm design and n8n + Gemini integration |
+| [PayOS Webhook Flow](./docs/payos_webhook_flow.md) | Payment lifecycle, HMAC-SHA256 verification, idempotency logic |
 | [State Management](./docs/state_management.md) | Flutter BLoC + Provider architecture guide |
 
 ---
 
 ## 👨‍💻 Team
 
-| Member | Role |
-|--------|------|
-| **Trần Phan Trung Kiên** | Backend API · AI Optimization Service · n8n Automation |
-| Team Member 2 | Mobile App (Flutter) |
-| Team Member 3 | Mobile App (Flutter) |
-| Team Member 4 | Admin Dashboard (React) |
-
----
-
-## 🏫 Project Info
-
-- **University:** FPT University – Can Tho Campus
-- **Program:** Software Engineering
-- **Type:** Capstone / Graduation Project
-- **Period:** May – August 2026
+| GitHub | Contributions |
+|--------|--------------|
+| **[@Krezzy88](https://github.com/Krezzy88)** (Trần Phan Trung Kiên) | Backend Core API · AI Optimization Service · n8n Automation · Gemini Integration · Socket.IO Chat |
+| **[@longntce182041](https://github.com/longntce182041)** | Team Lead · Mobile App Architecture · Meal Planning Flow · Diet Audit · Flutter UI |
+| **[@KinoKaikan](https://github.com/KinoKaikan)** (VietT) | Mobile App · Meal Scan (UC-16) · Flutter Features |
+| **[@MinhDan004](https://github.com/MinhDan004)** | Nutrition Management · Admin Features (UC-85, UC-86) |
+| **[@HoangLong1709](https://github.com/HoangLong1709)** (La Võ Hoàng Long) | Admin Dashboard · System Analytics · Excel Import/Export |
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ at FPT University Can Tho · 2026</sub>
+  <sub>Built with ❤️ by Team Wealthy Eater · FPT University Can Tho · 2026</sub>
 </div>
