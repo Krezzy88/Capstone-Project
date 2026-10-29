@@ -17,7 +17,7 @@
 
 **Wealthy Eater** is a comprehensive HealthTech ecosystem that connects users with certified nutritionists. It automates personalized meal planning via AI, tracks nutrition through meal image scanning, and facilitates real-time expert consultations with integrated payment flows.
 
-> **Type:** Graduation / Capstone Project — 4-member team  
+> **Type:** Graduation / Capstone Project — 5-member team  
 > **Period:** May – August 2026  
 > **University:** FPT University – Can Tho Campus
 
