@@ -1,8 +1,8 @@
-# OS metadata files
+# ─── OS Metadata ───────────────────────────────────────────────
 .DS_Store
 Thumbs.db
 
-# IDEs and Editors
+# ─── IDEs & Editors ─────────────────────────────────────────────
 .idea/
 .vscode/
 *.suo
@@ -11,32 +11,80 @@ Thumbs.db
 *.sln
 *.sw?
 
-# Logs
+# ─── Logs ───────────────────────────────────────────────────────
 *.log
 logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Backup and temp files
+# ─── Backup / Temp ──────────────────────────────────────────────
 *.bak
 *~
+*.tmp
 
-# Dependencies (accidental root installs)
+# ─── Dependencies ───────────────────────────────────────────────
 node_modules/
 __pycache__/
+*.pyc
 .venv/
 env/
 venv/
+ENV/
 
-# Local Environment Overrides
+# ─── Build / Output artefacts ───────────────────────────────────
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+.eslintcache
+
+# ─── Secrets & Environment variables ────────────────────────────
 .env
 .env.*
-# Tránh quét các file tự sinh của flutter build local
-# (Already handled by subproject .gitignores, do not ignore the entire platform directories)
+firebase-key.json
 
-# Agent Skills
+# ─── Personal / Binary files ────────────────────────────────────
+*.docx
+*.pdf
+
+# ─── Flutter / Dart ─────────────────────────────────────────────
+.dart_tool/
+.pub-cache/
+.pub/
+.flutter-plugins-dependencies
+**/doc/api/
+**/ios/Flutter/.last_build_id
+/coverage/
+app.*.symbols
+app.*.map.json
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# ─── Python ─────────────────────────────────────────────────────
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ─── Node / npm ─────────────────────────────────────────────────
+jspm_packages/
+*.tgz
+.npm/
+
+# ─── Uploads & Seed manifests ───────────────────────────────────
+uploads/
+scripts/seed-manifest-*.json
+
+# ─── Agent / AI artefacts ───────────────────────────────────────
 .agent
-
-# Markdown files
 *GEMINI.md
-
-# n8n workflows
-n8n_*.json
